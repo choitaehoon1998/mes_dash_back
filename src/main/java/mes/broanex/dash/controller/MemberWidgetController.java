@@ -39,4 +39,10 @@ public class MemberWidgetController {
 		memberWidgetService.updateMemberWidget(memberWidget);
 		return ok().build();
 	}
+
+	@DeleteMapping(value = "/memberWidget/{id}")
+	public ResponseEntity<Void> deleteMemberWidget(@PathVariable(name = "id") Long id) {
+		memberWidgetService.deleteMemberWidget(id);
+		return ok().build();
+	}
 }

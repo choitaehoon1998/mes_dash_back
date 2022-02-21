@@ -8,7 +8,7 @@ import lombok.Getter;
 import javax.persistence.*;
 
 @Entity
-@Table(name = "MEMBER_WIDGET")
+@Table(name = "MEMBER_WIDGET", uniqueConstraints = @UniqueConstraint(columnNames = {"MEMBER_INDEX_NO", "WIDGET_INDEX_NO"}))
 //@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "indexNo")
 @Getter
 public class MemberWidget {
@@ -35,7 +35,7 @@ public class MemberWidget {
 //	private User user;
 
 	@Column(name = "MEMBER_INDEX_NO")
-	private String memberIndexNo;
+	private Long memberIndexNo;
 
 	@ManyToOne
 	@JoinColumn(name = "WIDGET_INDEX_NO")

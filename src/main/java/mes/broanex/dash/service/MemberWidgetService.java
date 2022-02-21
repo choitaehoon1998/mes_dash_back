@@ -30,4 +30,12 @@ public class MemberWidgetService {
 			memberWidgetRepository.save(memberWidget);
 		}
 	}
+
+	public void deleteMemberWidget(Long id) {
+		MemberWidget memberWidget =
+				memberWidgetRepository.findMemberWidgetByMemberIndexNoAndWidget_IndexNo(1L, id);
+		if (memberWidget != null) {
+			memberWidgetRepository.delete(memberWidget);
+		}
+	}
 }

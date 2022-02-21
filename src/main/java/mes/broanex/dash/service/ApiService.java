@@ -3,6 +3,7 @@ package mes.broanex.dash.service;
 import mes.broanex.dash.entity.Item;
 import mes.broanex.dash.entity.ItemGroup;
 import mes.broanex.dash.entity.MemberWidget;
+import mes.broanex.dash.entity.Widget;
 import mes.broanex.dash.repository.MemberWidgetRepository;
 import org.springframework.stereotype.Service;
 
@@ -28,9 +29,14 @@ public class ApiService {
 		String dataColumnYn = (String) hashMap.get("dataColumnYn");
 		for (MemberWidget memberWidget : memberWidgetList) {
 			HashMap<String, Object> returnMap = new HashMap<>();
+
+			Widget widget = memberWidget.getWidget();
+			returnMap.put("name", widget.getName());
+			returnMap.put("id", widget.getIndexNo());
+
 			List<String> columnList = new ArrayList<>();
 			if (typeYn.equals("Y")) {
-				returnMap.put("type", memberWidget.getWidget().getType().getCode());
+				returnMap.put("type", widget.getType().getCode());
 			}
 			if (positionYn.equals("Y")) {
 				HashMap<String, Long> positionMap = new HashMap<String, Long>() {{
@@ -41,9 +47,12 @@ public class ApiService {
 				}};
 				returnMap.put("position", positionMap);
 			}
+
+
 			if (dataColumnYn.equals("Y")) {
 				List<Object> objectList = new ArrayList<>();
-				List<ItemGroup> itemGroupList = memberWidget.getWidget().getItemGroupList();
+
+				List<ItemGroup> itemGroupList = widget.getItemGroupList();
 				for (ItemGroup itemGroup : itemGroupList) {
 					HashMap<String, Object> columnMap = new HashMap<>();
 					Item item = itemGroup.getItem();
@@ -52,14 +61,13 @@ public class ApiService {
 					columnMap.put("order", itemGroup.getOrder());
 					objectList.add(columnMap);
 				}
-				if(objectList.size() != 0){
+				if (objectList.size() != 0) {
 					returnMap.put("column", objectList);
 				}
-
 				List<Object> dataList = new ArrayList<>();
 
 				HashMap<String, Object> dataMap = new HashMap<>();
-				if(columnList.size() != 0){
+				if (columnList.size() != 0) {
 					for (String string : columnList) {
 						dataMap.put(string, "1");
 					}
