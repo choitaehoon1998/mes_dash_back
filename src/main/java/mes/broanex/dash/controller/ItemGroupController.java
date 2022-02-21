@@ -3,10 +3,12 @@ package mes.broanex.dash.controller;
 import mes.broanex.dash.entity.ItemGroup;
 import mes.broanex.dash.service.ItemGroupService;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
+import java.util.HashMap;
+import java.util.List;
+
+import static org.springframework.http.MediaType.MULTIPART_FORM_DATA_VALUE;
 import static org.springframework.http.ResponseEntity.ok;
 
 
@@ -18,8 +20,16 @@ public class ItemGroupController {
 		this.itemGroupService = itemGroupService;
 	}
 
-	@PostMapping(value = "/itemGroup")
-	public ResponseEntity<Void> saveNewItemGroup(@RequestBody ItemGroup itemGroup) {
+	@GetMapping(value = "/itemGroup")
+	public ResponseEntity<List<ItemGroup>> GetItemGroupByParam() {
+		List<ItemGroup> itemGroupList = itemGroupService.GetItemGroupByParam(new HashMap<String, Object>() {{
+			put("aa", "aa");
+		}});
+		return ok(itemGroupList);
+	}
+
+	@PostMapping(value = "/itemGroup", consumes = MULTIPART_FORM_DATA_VALUE)
+	public ResponseEntity<Void> saveNewItemGroup(@RequestPart(value = "itemGroup") ItemGroup itemGroup) {
 		itemGroupService.saveNewItemGroup(itemGroup);
 		return ok().build();
 	}
