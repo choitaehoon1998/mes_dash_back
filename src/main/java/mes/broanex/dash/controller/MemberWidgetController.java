@@ -1,5 +1,6 @@
 package mes.broanex.dash.controller;
 
+import mes.broanex.dash.dto.MemberWidgetRequestDto;
 import mes.broanex.dash.entity.MemberWidget;
 import mes.broanex.dash.service.MemberWidgetService;
 import org.springframework.http.ResponseEntity;
@@ -29,8 +30,8 @@ public class MemberWidgetController {
 
 	@PostMapping(value = "/memberWidget", consumes = MULTIPART_FORM_DATA_VALUE)
 	public ResponseEntity<Void> saveNewMemberWidget(
-			@RequestPart(value = "memberWidget") MemberWidget memberWidget) {
-		memberWidgetService.saveNewMemberWidget(memberWidget);
+			@RequestPart(value = "memberWidget") MemberWidgetRequestDto memberWIdgetRequestDto) {
+		memberWidgetService.saveNewMemberWidget(memberWIdgetRequestDto);
 		return ok().build();
 	}
 
@@ -40,9 +41,9 @@ public class MemberWidgetController {
 		return ok().build();
 	}
 
-	@DeleteMapping(value = "/memberWidget/{id}")
-	public ResponseEntity<Void> deleteMemberWidget(@PathVariable(name = "id") Long id) {
-		memberWidgetService.deleteMemberWidget(id);
+	@DeleteMapping(value = "/memberWidget/{widgetId}")
+	public ResponseEntity<Void> deleteMemberWidget(@PathVariable(name = "widgetId") Long widgetId) {
+		memberWidgetService.deleteMemberWidget(widgetId);
 		return ok().build();
 	}
 }

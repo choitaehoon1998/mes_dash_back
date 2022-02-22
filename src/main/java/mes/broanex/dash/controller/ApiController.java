@@ -1,5 +1,6 @@
 package mes.broanex.dash.controller;
 
+import mes.broanex.dash.dto.WidgetResponseDto;
 import mes.broanex.dash.service.ApiService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -29,5 +30,11 @@ public class ApiController {
 			put("dataColumnYn", dataColumnYn);
 		}});
 		return ok(objectList);
+	}
+
+	@GetMapping(value = "/api/list")
+	public ResponseEntity<List<WidgetResponseDto>> getAllWidget() {
+		List<WidgetResponseDto> widgetResponseDtoList = apiService.getAllWidget();
+		return ok(widgetResponseDtoList);
 	}
 }

@@ -1,10 +1,12 @@
 package mes.broanex.dash.service;
 
+import mes.broanex.dash.dto.WidgetResponseDto;
 import mes.broanex.dash.entity.Item;
 import mes.broanex.dash.entity.ItemGroup;
 import mes.broanex.dash.entity.MemberWidget;
 import mes.broanex.dash.entity.Widget;
 import mes.broanex.dash.repository.MemberWidgetRepository;
+import mes.broanex.dash.repository.WidgetRepository;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -14,9 +16,11 @@ import java.util.List;
 @Service
 public class ApiService {
 	private final MemberWidgetRepository memberWidgetRepository;
+	private final WidgetRepository widgetRepository;
 
-	public ApiService(MemberWidgetRepository memberWidgetRepository) {
+	public ApiService(MemberWidgetRepository memberWidgetRepository, WidgetRepository widgetRepository) {
 		this.memberWidgetRepository = memberWidgetRepository;
+		this.widgetRepository = widgetRepository;
 	}
 
 	public List<Object> getByParam(HashMap<String, Object> hashMap) {
@@ -82,5 +86,10 @@ public class ApiService {
 			returnList.add(returnMap);
 		}
 		return returnList;
+	}
+
+	public List<WidgetResponseDto> getAllWidget() {
+		List<WidgetResponseDto> widgetList = widgetRepository.findReturnAsResponseDto();
+		return widgetList;
 	}
 }

@@ -1,9 +1,9 @@
 package mes.broanex.dash.entity;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
-import com.fasterxml.jackson.annotation.JsonIdentityInfo;
-import com.fasterxml.jackson.annotation.ObjectIdGenerators;
+import lombok.Builder;
 import lombok.Getter;
+import lombok.Setter;
 
 import javax.persistence.*;
 
@@ -11,6 +11,7 @@ import javax.persistence.*;
 @Table(name = "MEMBER_WIDGET", uniqueConstraints = @UniqueConstraint(columnNames = {"MEMBER_INDEX_NO", "WIDGET_INDEX_NO"}))
 //@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "indexNo")
 @Getter
+@Setter
 public class MemberWidget {
 
 	@Id
