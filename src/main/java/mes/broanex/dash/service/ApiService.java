@@ -23,11 +23,11 @@ public class ApiService {
 		this.widgetRepository = widgetRepository;
 	}
 
-	public List<Object> getByParam(HashMap<String, Object> hashMap) {
+	public List<HashMap<String,Object>> getByParam(HashMap<String, Object> hashMap) {
 		List<MemberWidget> memberWidgetList = memberWidgetRepository.findAllByParam(new HashMap<String, Object>() {{
 		}});
 
-		List<Object> returnList = new ArrayList<>();
+		List<HashMap<String,Object>> returnList = new ArrayList<>();
 		String typeYn = (String) hashMap.get("typeYn");
 		String positionYn = (String) hashMap.get("positionYn");
 		String dataColumnYn = (String) hashMap.get("dataColumnYn");

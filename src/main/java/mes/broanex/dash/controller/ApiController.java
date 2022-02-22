@@ -21,10 +21,10 @@ public class ApiController {
 	}
 
 	@GetMapping(value = "/api")
-	public ResponseEntity<List<Object>> getByParam(@RequestParam(required = false, defaultValue = "Y") String typeYn,
-	                                               @RequestParam(required = false, defaultValue = "Y") String positionYn,
-	                                               @RequestParam(required = false, defaultValue = "Y") String dataColumnYn) {
-		List<Object> objectList = apiService.getByParam(new HashMap<String, Object>() {{
+	public ResponseEntity<List<HashMap<String, Object>>> getByParam(@RequestParam(required = false, defaultValue = "Y") String typeYn,
+	                                                                @RequestParam(required = false, defaultValue = "Y") String positionYn,
+	                                                                @RequestParam(required = false, defaultValue = "Y") String dataColumnYn) {
+		List<HashMap<String, Object>> objectList = apiService.getByParam(new HashMap<String, Object>() {{
 			put("typeYn", typeYn);
 			put("positionYn", positionYn);
 			put("dataColumnYn", dataColumnYn);
